@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sameer Dwivedi | Full Stack Developer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#2c0051",
+                    "on-secondary": "#003640",
+                    "surface-container-high": "#2e2832",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#8292aa",
+                    "tertiary": "#b7c8e1",
+                    "inverse-surface": "#eadfed",
+                    "on-tertiary-container": "#1a2b3e",
+                    "surface-container-low": "#1f1a23",
+                    "secondary-container": "#03b5d3",
+                    "on-surface": "#eadfed",
+                    "on-error": "#690005",
+                    "inverse-primary": "#842bd2",
+                    "on-primary-fixed-variant": "#6900b3",
+                    "secondary-fixed-dim": "#4cd7f6",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed": "#d3e4fe",
+                    "inverse-on-surface": "#342e38",
+                    "secondary-fixed": "#acedff",
+                    "primary-container": "#b76dff",
+                    "surface": "#16111b",
+                    "on-primary": "#490080",
+                    "surface-tint": "#ddb7ff",
+                    "primary": "#ddb7ff",
+                    "tertiary-fixed-dim": "#b7c8e1",
+                    "on-primary-container": "#400071",
+                    "surface-container": "#231e27",
+                    "surface-bright": "#3d3741",
+                    "error-container": "#93000a",
+                    "background": "#0A0A0A",
+                    "on-tertiary": "#213145",
+                    "surface-dim": "#16111b",
+                    "on-secondary-fixed": "#001f26",
+                    "on-background": "#eadfed",
+                    "on-surface-variant": "#cfc2d6",
+                    "secondary": "#4cd7f6",
+                    "primary-fixed": "#f0dbff",
+                    "primary-fixed-dim": "#ddb7ff",
+                    "surface-container-highest": "#39323d",
+                    "outline-variant": "#4d4354",
+                    "on-secondary-fixed-variant": "#004e5c",
+                    "outline": "#988d9f",
+                    "on-tertiary-fixed": "#0b1c30",
+                    "on-secondary-container": "#00424e",
+                    "surface-container-lowest": "#110c15",
+                    "on-tertiary-fixed-variant": "#38485d",
+                    "surface-variant": "#39323d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "section-gap": "120px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-xl": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        html, body { scroll-behavior: smooth; }
+        body { background-color: #0A0A0A; color: #eadfed; cursor: none; overflow-x: hidden; }
+        html.has-scroll-smooth { overflow: hidden; }
+        html.has-scroll-smooth body { overflow: hidden; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-glow-purple:hover {
+            box-shadow: 0 0 20px rgba(221, 183, 255, 0.2);
+            border-color: rgba(221, 183, 255, 0.5);
+        }
+        .neon-glow-cyan:hover {
+            box-shadow: 0 0 20px rgba(76, 215, 246, 0.2);
+            border-color: rgba(76, 215, 246, 0.5);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #ddb7ff, #4cd7f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-gradient-vibrant {
+            background: linear-gradient(135deg, #ddb7ff 0%, #4cd7f6 100%);
+        }
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddb7ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+            mix-blend-mode: difference;
+        }
+        #torch-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            background: radial-gradient(circle 300px at var(--mouse-x) var(--mouse-y), rgba(221, 183, 255, 0.05), transparent 80%);
+            z-index: 40;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        canvas#particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .terminal-header {
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Toast notification */
+        .toast {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 10000;
+            padding: 1rem 1.5rem; border-radius: 1rem;
+            background: rgba(255,255,255,0.05); backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #eadfed; font-weight: 600;
+            transform: translateY(120%); opacity: 0;
+            transition: all 0.5s cubic-bezier(0.2,0.8,0.2,1);
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { border-color: rgba(76,215,246,0.5); box-shadow: 0 0 20px rgba(76,215,246,0.15); }
+        .toast.error { border-color: rgba(255,180,171,0.5); box-shadow: 0 0 20px rgba(255,180,171,0.15); }
+    </style>
+</head>
+<body class="font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<canvas id="particle-canvas"></canvas>
+<div id="custom-cursor"></div>
+<div id="torch-effect"></div>
+<div id="toast" class="toast"></div>
+<div data-scroll-container id="scroll-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+<span class="text-xl font-bold bg-gradient-to-r from-purple-500 to-cyan-400 bg-clip-text text-transparent tracking-tight">Sameer Dwivedi</span>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-purple-400 border-b-2 border-purple-500 pb-1" href="#about">About</a>
+<a class="text-slate-400 hover:text-white transition-all duration-300" href="#skills">Skills</a>
+<a class="text-slate-400 hover:text-white transition-all duration-300" href="#projects">Projects</a>
+<a class="text-slate-400 hover:text-white transition-all duration-300" href="#contact">Contact</a>
+</div>
+<button class="bg-gradient-vibrant text-white px-6 py-2 rounded-full font-bold transition-all duration-300 hover:shadow-[0_0_15px_rgba(76,215,246,0.4)]">
+                Get in Touch
+            </button>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="min-h-screen flex flex-col items-center justify-center pt-20 px-8 relative overflow-hidden">
+<div class="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8 reveal text-left">
+<h1 class="font-display-xl text-6xl md:text-8xl text-gradient leading-tight">
+                        Sameer Dwivedi
+                    </h1>
+<p class="text-2xl md:text-3xl text-on-surface-variant font-semibold">Full Stack MERN Developer</p>
+<div class="flex gap-4">
+<a href="projects.html" class="bg-gradient-vibrant text-on-primary-container px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-all no-underline">
+                            Explore My Work
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+<a href="#contact" class="glass-card px-8 py-4 rounded-xl font-bold border border-white/10 hover:bg-white/5 transition-all no-underline text-on-surface">
+                            Hire Me
+                        </a>
+</div>
+</div>
+<!-- Terminal Component -->
+<div class="reveal delay-200">
+<div class="glass-card rounded-xl overflow-hidden shadow-2xl border-white/20">
+<div class="terminal-header px-4 py-2 flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+<span class="text-xs text-slate-500 ml-2 font-mono">sameer@dwivedi: ~</span>
+</div>
+<div class="p-6 font-mono text-sm md:text-base leading-relaxed text-cyan-300/90">
+<div class="mb-2"><span class="text-purple-400">const</span> developer = {</div>
+<div class="pl-4">status: <span class="text-yellow-300">"active"</span>,</div>
+<div class="pl-4">stack: <span class="text-yellow-300">["MongoDB", "Express", "React", "Node"]</span>,</div>
+<div class="pl-4">location: <span class="text-yellow-300">"India"</span>,</div>
+<div class="pl-4">focus: <span class="text-yellow-300">"Scalable Web Architectures"</span></div>
+<div class="mb-2">};</div>
+<div class="text-white typing-cursor" id="typing-text"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-[120px] px-8 max-w-7xl mx-auto" id="about">
+<div class="grid md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-5 relative reveal">
+<div class="aspect-square glass-card rounded-3xl overflow-hidden flex items-center justify-center p-8">
+<!-- Abstract Developer Visual -->
+<svg class="w-full h-full text-cyan-400/20" fill="none" stroke="currentColor" stroke-width="0.5" viewbox="0 0 24 24">
+<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+<circle class="text-purple-500 animate-pulse" cx="12" cy="12" r="3"></circle>
+</svg>
+<div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 pointer-events-none"></div>
+</div>
+</div>
+<div class="md:col-span-7 flex flex-col justify-center space-y-8 reveal delay-200">
+<div>
+<span class="font-label-sm text-label-sm text-secondary tracking-[0.2em] uppercase">The Journey</span>
+<h2 class="font-headline-lg text-headline-lg text-white mt-2">BCA Student &amp; Engineering Enthusiast</h2>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        I am currently a 2nd-year BCA student at SMS Varanasi, dedicated to mastering the art of building robust, scalable web applications. My passion lies in the MERN stack, where I translate complex problems into elegant, user-centric solutions.
+                    </p>
+<div class="grid grid-cols-2 gap-8">
+<div class="glass-card p-6 rounded-xl border-l-4 border-purple-500 hover:translate-x-2 transition-transform">
+<h4 class="font-bold text-white text-xl">Current Focus</h4>
+<p class="text-on-surface-variant text-sm mt-2">Cloud Native Architectures &amp; Real-time Web Systems</p>
+</div>
+<div class="glass-card p-6 rounded-xl border-l-4 border-cyan-500 hover:translate-x-2 transition-transform">
+<h4 class="font-bold text-white text-xl">Academic Goal</h4>
+<p class="text-on-surface-variant text-sm mt-2">Specializing in Computational Systems &amp; Data Structures</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills Section -->
+<section class="py-[120px] bg-surface-container-lowest/30 backdrop-blur-sm" id="skills">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-16 reveal">
+<h2 class="font-headline-lg text-headline-lg text-white">Technical Arsenal</h2>
+<p class="text-on-surface-variant mt-4">Tools and technologies I use to bring ideas to life.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 reveal">
+<div class="glass-card p-8 rounded-2xl text-center group hover:-translate-y-2 transition-all duration-300 neon-glow-cyan">
+<span class="material-symbols-outlined text-5xl text-cyan-400 mb-4 block">database</span>
+<h3 class="font-bold text-white">MongoDB</h3>
+<div class="mt-4 h-1 w-0 group-hover:w-full bg-cyan-500 transition-all duration-300 mx-auto"></div>
+</div>
+<div class="glass-card p-8 rounded-2xl text-center group hover:-translate-y-2 transition-all duration-300 neon-glow-purple">
+<span class="material-symbols-outlined text-5xl text-purple-400 mb-4 block">api</span>
+<h3 class="font-bold text-white">Express.js</h3>
+<div class="mt-4 h-1 w-0 group-hover:w-full bg-purple-500 transition-all duration-300 mx-auto"></div>
+</div>
+<div class="glass-card p-8 rounded-2xl text-center group hover:-translate-y-2 transition-all duration-300 neon-glow-cyan">
+<span class="material-symbols-outlined text-5xl text-cyan-400 mb-4 block">rebase_edit</span>
+<h3 class="font-bold text-white">React</h3>
+<div class="mt-4 h-1 w-0 group-hover:w-full bg-cyan-500 transition-all duration-300 mx-auto"></div>
+</div>
+<div class="glass-card p-8 rounded-2xl text-center group hover:-translate-y-2 transition-all duration-300 neon-glow-purple">
+<span class="material-symbols-outlined text-5xl text-purple-400 mb-4 block">javascript</span>
+<h3 class="font-bold text-white">Node.js</h3>
+<div class="mt-4 h-1 w-0 group-hover:w-full bg-purple-500 transition-all duration-300 mx-auto"></div>
+</div>
+<div class="glass-card p-8 rounded-2xl text-center group hover:-translate-y-2 transition-all duration-300 neon-glow-cyan">
+<span class="material-symbols-outlined text-5xl text-cyan-400 mb-4 block">palette</span>
+<h3 class="font-bold text-white">Tailwind</h3>
+<div class="mt-4 h-1 w-0 group-hover:w-full bg-cyan-500 transition-all duration-300 mx-auto"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Section -->
+<section class="py-[120px] px-8 max-w-7xl mx-auto" id="projects">
+<div class="flex justify-between items-end mb-16 reveal">
+<div>
+<span class="font-label-sm text-label-sm text-primary tracking-[0.2em] uppercase">Showcase</span>
+<h2 class="font-headline-lg text-headline-lg text-white mt-2">Selected Works</h2>
+</div>
+<a href="projects.html" class="text-primary hover:text-white transition-colors flex items-center gap-2 font-bold group">
+                    View All Projects <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">open_in_new</span>
+</a>
+</div>
+<div class="grid md:grid-cols-2 gap-12">
+<!-- Project 1 -->
+<div class="group glass-card rounded-3xl overflow-hidden border-white/5 hover:border-purple-500/30 transition-all duration-500 reveal">
+<div class="relative overflow-hidden h-80">
+<img alt="E-Commerce Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtYxi_gZh7he9N_GO6Qi-cCG-vQBzgxeQ9GiOiUI3TL7yBMFXUViuFBAqc4BkbXlfwxlDv4VD_zggV18-o5vDoHXRwE0FrDtPUpfQQYP3jigOxJW9GCQVcK2XwFt_RfMRbUrxbbR5KwFJnuXG6K_CNjcvGxiPu80QLQeh_lOJQQTdjh4OAb61KQwx787993Ya0dN8Gze_Q6R7Yz8UxG6hD3XdXGpGqZdRid8sAG7T5ewp3WRtFoAhDGU26T_3pIvWUX9yatDktw9jC"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+<div class="absolute bottom-6 left-6 flex gap-2">
+<span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">MERN</span>
+<span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">Redux</span>
+</div>
+</div>
+<div class="p-8 space-y-4">
+<h3 class="text-2xl font-bold text-white">Decentralized Shop</h3>
+<p class="text-on-surface-variant">A fully featured e-commerce platform with real-time inventory management and secure payment gateways.</p>
+<a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all" href="#">
+                            View Project <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="group glass-card rounded-3xl overflow-hidden border-white/5 hover:border-cyan-500/30 transition-all duration-500 reveal delay-200">
+<div class="relative overflow-hidden h-80">
+<img alt="DevConnect Platform" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-oZLdMocoVTVkHgUqjp6bA-4c-8-6hauImcuKp_-RxGtxLnoTcsqDGIyNgWjgLpn8C23MWGD95OXAHHI51dv2-VYl25kp0ri_cNhf04AvRzkSTO80Gk0CPeXSMX8SLLr0dscoLi83bggPkYHlXJ7qL5qEElbrH9qB5gnzTttMDDtOD2per0pdJ5cjyWpmiEfuAHi6aAZOBNSLd0JewASRWpaZoKteGw_38--PmTZF2yerQ7HgS6E7pesZ2xJOw0dZ5VbsuP6purm3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+<div class="absolute bottom-6 left-6 flex gap-2">
+<span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">React</span>
+<span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">Socket.io</span>
+</div>
+</div>
+<div class="p-8 space-y-4">
+<h3 class="text-2xl font-bold text-white">DevConnect</h3>
+<p class="text-on-surface-variant">Real-time collaboration platform for developers with integrated chat and live code editing features.</p>
+<a class="inline-flex items-center gap-2 text-cyan-400 font-bold hover:gap-4 transition-all" href="#">
+                            View Project <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-[120px] px-8" id="contact">
+<div class="max-w-4xl mx-auto glass-card rounded-[2rem] p-12 border-white/10 relative reveal">
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-gradient-vibrant p-1 rounded-full">
+<div class="bg-background rounded-full p-4">
+<span class="material-symbols-outlined text-4xl text-white">alternate_email</span>
+</div>
+</div>
+<div class="text-center mb-12">
+<h2 class="font-headline-lg text-headline-lg text-white">Let's Create Something Great</h2>
+<p class="text-on-surface-variant mt-4">Currently open for freelance opportunities and collaborations.</p>
+</div>
+<form id="contact-form" class="space-y-6">
+<div class="grid md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-400 uppercase tracking-widest px-1">Name</label>
+<input id="contact-name" name="from_name" class="w-full bg-[#0A0A0A]/50 border-slate-800 rounded-xl px-6 py-4 focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all outline-none text-white" placeholder="John Doe" type="text" required/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-400 uppercase tracking-widest px-1">Email</label>
+<input id="contact-email" name="from_email" class="w-full bg-[#0A0A0A]/50 border-slate-800 rounded-xl px-6 py-4 focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all outline-none text-white" placeholder="john@example.com" type="email" required/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-400 uppercase tracking-widest px-1">Message</label>
+<textarea id="contact-message" name="message" class="w-full bg-[#0A0A0A]/50 border-slate-800 rounded-xl px-6 py-4 focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all outline-none text-white" placeholder="Tell me about your project..." rows="4" required></textarea>
+</div>
+<button id="contact-submit" class="w-full bg-gradient-vibrant text-white font-black py-5 rounded-xl uppercase tracking-widest hover:shadow-[0_0_30px_rgba(76,215,246,0.3)] transition-all transform active:scale-95" type="submit">
+                        Send Mission Brief
+                    </button>
+</form>
+</div>
+</section>
+</main>
+</div><!-- end scroll-container -->
+<!-- Footer -->
+<footer class="w-full border-t border-white/5 bg-[#0A0A0A]">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 px-12 py-16 max-w-7xl mx-auto">
+<div class="space-y-4">
+<span class="text-lg font-black text-white text-sm uppercase tracking-widest">Sameer Dwivedi</span>
+<p class="text-slate-600 text-sm uppercase tracking-widest">© 2024 Sameer Dwivedi. Engineered for the Decentralized Web.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-slate-600 hover:text-cyan-400 transition-colors hover:-translate-y-1 transition-transform text-sm uppercase tracking-widest" href="#">GitHub</a>
+<a class="text-slate-600 hover:text-cyan-400 transition-colors hover:-translate-y-1 transition-transform text-sm uppercase tracking-widest" href="#">LinkedIn</a>
+<a class="text-slate-600 hover:text-cyan-400 transition-colors hover:-translate-y-1 transition-transform text-sm uppercase tracking-widest" href="#">Twitter</a>
+<a class="text-purple-500 font-bold text-sm uppercase tracking-widest" href="#">Contact</a>
+</div>
+</div>
+</footer>
+<script src="config.js"></script>
+<script>
+        // ── Locomotive Scroll ──
+        const locoScroll = new LocomotiveScroll({
+            el: document.querySelector('#scroll-container'),
+            smooth: true,
+            multiplier: 0.8,
+            lerp: 0.07,
+            smartphone: { smooth: true },
+            tablet: { smooth: true }
+        });
+
+        // ── Custom Cursor & Torch ──
+        const cursor = document.getElementById('custom-cursor');
+        const torch = document.getElementById('torch-effect');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            torch.style.setProperty('--mouse-x', e.clientX + 'px');
+            torch.style.setProperty('--mouse-y', e.clientY + 'px');
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.8)');
+        document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
+
+        // ── Enhanced Mouse-Reactive Particle Background ──
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let trailParticles = [];
+        let mouse = { x: null, y: null };
+        const PARTICLE_COUNT = 90;
+        const CONNECTION_DIST = 150;
+        const MOUSE_RADIUS = 180;
+
+        function initParticles() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                particles.push({
+                    x, y, homeX: x, homeY: y,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
+                    size: Math.random() * 2.5 + 0.5
+                });
+            }
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Mouse trail
+            if (mouse.x !== null) {
+                trailParticles.push({
+                    x: mouse.x + (Math.random() - 0.5) * 20,
+                    y: mouse.y + (Math.random() - 0.5) * 20,
+                    life: 1, size: Math.random() * 3 + 1
+                });
+            }
+            for (let t = trailParticles.length - 1; t >= 0; t--) {
+                const tp = trailParticles[t];
+                tp.life -= 0.025;
+                if (tp.life <= 0) { trailParticles.splice(t, 1); continue; }
+                ctx.beginPath();
+                ctx.arc(tp.x, tp.y, tp.size * tp.life, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(76, 215, 246, ${tp.life * 0.3})`;
+                ctx.fill();
+            }
+            if (trailParticles.length > 40) trailParticles.length = 40;
+
+            // Build neighbor lists for triangle optimization
+            particles.forEach((p, i) => {
+                // Mouse repulsion
+                if (mouse.x !== null) {
+                    const dx = p.x - mouse.x, dy = p.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < MOUSE_RADIUS && dist > 0) {
+                        const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
+                        p.vx += (dx / dist) * force * 1.2;
+                        p.vy += (dy / dist) * force * 1.2;
+                    }
+                }
+
+                // Gentle spring back to home position
+                p.vx += (p.homeX - p.x) * 0.001;
+                p.vy += (p.homeY - p.y) * 0.001;
+
+                // Damping + drift
+                p.vx *= 0.98;
+                p.vy *= 0.98;
+                p.vx += (Math.random() - 0.5) * 0.06;
+                p.vy += (Math.random() - 0.5) * 0.06;
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // Bounce at edges
+                if (p.x < 0) { p.x = 0; p.vx = Math.abs(p.vx) * 0.5; }
+                if (p.x > canvas.width) { p.x = canvas.width; p.vx = -Math.abs(p.vx) * 0.5; }
+                if (p.y < 0) { p.y = 0; p.vy = Math.abs(p.vy) * 0.5; }
+                if (p.y > canvas.height) { p.y = canvas.height; p.vy = -Math.abs(p.vy) * 0.5; }
+
+                // Color shift near mouse
+                let pColor = 'rgba(221, 183, 255, 0.4)';
+                if (mouse.x !== null) {
+                    const md = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+                    if (md < MOUSE_RADIUS * 1.5) {
+                        const t = 1 - md / (MOUSE_RADIUS * 1.5);
+                        pColor = `rgba(${Math.round(221 - 145 * t)},${Math.round(183 + 32 * t)},${Math.round(255 - 9 * t)},${0.4 + t * 0.4})`;
+                    }
+                }
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = pColor;
+                ctx.fill();
+
+                // Connections
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const d = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (d < CONNECTION_DIST) {
+                        let alpha = (1 - d / CONNECTION_DIST) * 0.1;
+                        if (mouse.x !== null) {
+                            const mDist = Math.hypot((p.x + p2.x) / 2 - mouse.x, (p.y + p2.y) / 2 - mouse.y);
+                            if (mDist < MOUSE_RADIUS) alpha += (1 - mDist / MOUSE_RADIUS) * 0.18;
+                        }
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(76, 215, 246, ${alpha})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+
+                        // Triangle fills — only check next 8 neighbors to avoid O(n³) explosion
+                        const limit = Math.min(j + 8, particles.length);
+                        for (let k = j + 1; k < limit; k++) {
+                            const p3 = particles[k];
+                            const d2 = Math.hypot(p2.x - p3.x, p2.y - p3.y);
+                            const d3 = Math.hypot(p.x - p3.x, p.y - p3.y);
+                            if (d2 < CONNECTION_DIST * 0.65 && d3 < CONNECTION_DIST * 0.65) {
+                                let ta = 0.015;
+                                if (mouse.x !== null) {
+                                    const cmd = Math.hypot((p.x + p2.x + p3.x) / 3 - mouse.x, (p.y + p2.y + p3.y) / 3 - mouse.y);
+                                    if (cmd < MOUSE_RADIUS) ta += (1 - cmd / MOUSE_RADIUS) * 0.06;
+                                }
+                                ctx.beginPath();
+                                ctx.moveTo(p.x, p.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.lineTo(p3.x, p3.y);
+                                ctx.closePath();
+                                ctx.fillStyle = `rgba(183, 130, 255, ${ta})`;
+                                ctx.fill();
+                            }
+                        }
+                    }
+                }
+            });
+            requestAnimationFrame(drawParticles);
+        }
+
+        window.addEventListener('resize', initParticles);
+        initParticles();
+        drawParticles();
+
+        // ── Reveal Animations (via Locomotive Scroll) ──
+        locoScroll.on('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {
+                    el.classList.add('active');
+                }
+            });
+        });
+        // Also trigger on load
+        setTimeout(() => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {
+                    el.classList.add('active');
+                }
+            });
+        }, 300);
+
+        // ── Terminal Typing Effect ──
+        const typingText = document.getElementById('typing-text');
+        const phrases = [
+            "> Initializing build sequence...",
+            "> Deploying to Vercel...",
+            "> System optimized. Ready for launch."
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+
+        function type() {
+            if (charIndex < phrases[phraseIndex].length) {
+                typingText.textContent += phrases[phraseIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 50);
+            } else {
+                setTimeout(erase, 2000);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 0) {
+                typingText.textContent = phrases[phraseIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, 30);
+            } else {
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(type, 500);
+            }
+        }
+
+        setTimeout(type, 1000);
+
+        // ── Web3Forms Contact Form ──
+        const WEB3FORMS_KEY = (typeof CONFIG !== 'undefined' && CONFIG.WEB3FORMS_KEY) || 'YOUR_ACCESS_KEY';
+
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + type + ' show';
+            setTimeout(() => { toast.classList.remove('show'); }, 4000);
+        }
+
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('contact-submit');
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            const formData = new FormData(this);
+            formData.append('access_key', WEB3FORMS_KEY);
+            formData.append('subject', 'New Portfolio Contact from ' + formData.get('from_name'));
+
+            try {
+                const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('✓ Message sent successfully!', 'success');
+                    this.reset();
+                } else {
+                    showToast('✗ Failed to send. Please try again.', 'error');
+                }
+            } catch (err) {
+                showToast('✗ Network error. Please try again.', 'error');
+            } finally {
+                btn.textContent = 'SEND MISSION BRIEF';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body></html>
