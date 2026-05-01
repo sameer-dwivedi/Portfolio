@@ -1,346 +1,572 @@
 <!DOCTYPE html>
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>All Projects | Sameer Dwivedi</title>
-<meta name="description" content="Browse all projects by Sameer Dwivedi — Full Stack MERN Developer building scalable web applications."/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css"/>
-<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
-<script id="tailwind-config">
-    tailwind.config = {
-        darkMode: "class",
-        theme: {
-            extend: {
-                "colors": {
-                    "primary": "#ddb7ff",
-                    "secondary": "#4cd7f6",
-                    "primary-container": "#b76dff",
-                    "on-primary-container": "#400071",
-                    "background": "#0A0A0A",
-                    "surface": "#16111b",
-                    "on-surface": "#eadfed",
-                    "on-surface-variant": "#cfc2d6",
-                    "surface-container-lowest": "#110c15",
-                    "outline-variant": "#4d4354"
-                },
-                "fontFamily": {
-                    "body-md": ["Plus Jakarta Sans"],
-                    "headline-lg": ["Plus Jakarta Sans"],
-                    "display-xl": ["Plus Jakarta Sans"],
-                    "label-sm": ["Plus Jakarta Sans"]
-                }
-            }
-        }
-    }
-</script>
-<style>
-    html, body { scroll-behavior: smooth; }
-    body { background-color: #0A0A0A; color: #eadfed; cursor: none; overflow-x: hidden; }
-    html.has-scroll-smooth { overflow: hidden; }
-    html.has-scroll-smooth body { overflow: hidden; }
-    .glass-card {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .text-gradient {
-        background: linear-gradient(to right, #ddb7ff, #4cd7f6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    .bg-gradient-vibrant {
-        background: linear-gradient(135deg, #ddb7ff 0%, #4cd7f6 100%);
-    }
-    #custom-cursor {
-        width: 20px; height: 20px;
-        border: 2px solid #ddb7ff; border-radius: 50%;
-        position: fixed; pointer-events: none; z-index: 9999;
-        transition: transform 0.1s ease;
-        mix-blend-mode: difference;
-    }
-    #torch-effect {
-        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-        pointer-events: none; z-index: 40;
-        background: radial-gradient(circle 300px at var(--mouse-x) var(--mouse-y), rgba(221,183,255,0.05), transparent 80%);
-    }
-    canvas#particle-canvas {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        z-index: -1; pointer-events: none;
-    }
-    .reveal {
-        opacity: 0; transform: translateY(30px);
-        transition: all 0.8s cubic-bezier(0.2,0.8,0.2,1);
-    }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-    .project-card {
-        transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
-    }
-    .project-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 0 40px rgba(221,183,255,0.08);
-        border-color: rgba(221,183,255,0.3);
-    }
-    .project-card:hover img { transform: scale(1.1); }
-    .project-card img { transition: transform 0.7s cubic-bezier(0.4,0,0.2,1); }
-</style>
-</head>
-<body class="font-body-md selection:bg-primary-container selection:text-on-primary-container">
-<canvas id="particle-canvas"></canvas>
-<div id="custom-cursor"></div>
-<div id="torch-effect"></div>
+<html class="dark" lang="en">
 
-<div data-scroll-container id="scroll-container">
-<!-- Nav -->
-<nav class="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
-<div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
-    <a href="index.html" class="text-xl font-bold bg-gradient-to-r from-purple-500 to-cyan-400 bg-clip-text text-transparent tracking-tight">Sameer Dwivedi</a>
-    <a href="index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-all duration-300 font-semibold">
-        <span class="material-symbols-outlined">arrow_back</span> Back to Home
-    </a>
-</div>
-</nav>
-
-<!-- Header -->
-<section class="pt-36 pb-16 px-8 max-w-7xl mx-auto">
-<div class="reveal">
-    <span class="font-label-sm text-sm text-secondary tracking-[0.2em] uppercase">Portfolio</span>
-    <h1 class="font-display-xl text-5xl md:text-7xl text-gradient leading-tight mt-2">All Projects</h1>
-    <p class="text-on-surface-variant text-lg mt-4 max-w-2xl">A collection of projects I've built — ranging from full-stack platforms to real-time systems. Each one taught me something new.</p>
-</div>
-</section>
-
-<!-- Projects Grid -->
-<section class="px-8 pb-32 max-w-7xl mx-auto">
-<div class="grid md:grid-cols-2 gap-10">
-
-    <!-- Project 1 -->
-    <div class="project-card glass-card rounded-3xl overflow-hidden reveal">
-        <div class="relative overflow-hidden h-72">
-            <img alt="Decentralized Shop" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtYxi_gZh7he9N_GO6Qi-cCG-vQBzgxeQ9GiOiUI3TL7yBMFXUViuFBAqc4BkbXlfwxlDv4VD_zggV18-o5vDoHXRwE0FrDtPUpfQQYP3jigOxJW9GCQVcK2XwFt_RfMRbUrxbbR5KwFJnuXG6K_CNjcvGxiPu80QLQeh_lOJQQTdjh4OAb61KQwx787993Ya0dN8Gze_Q6R7Yz8UxG6hD3XdXGpGqZdRid8sAG7T5ewp3WRtFoAhDGU26T_3pIvWUX9yatDktw9jC"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-70"></div>
-            <div class="absolute bottom-5 left-5 flex gap-2">
-                <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">MERN</span>
-                <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">Redux</span>
-            </div>
-        </div>
-        <div class="p-7 space-y-3">
-            <h3 class="text-2xl font-bold text-white">Decentralized Shop</h3>
-            <p class="text-on-surface-variant text-sm">A fully featured e-commerce platform with real-time inventory management, secure payment gateways, and admin dashboard with analytics.</p>
-            <div class="flex gap-4 pt-2">
-                <a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-3 transition-all text-sm" href="#">View Live <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-                <a class="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-white transition-all text-sm" href="#">GitHub <span class="material-symbols-outlined text-base">code</span></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Project 2 -->
-    <div class="project-card glass-card rounded-3xl overflow-hidden reveal" style="transition-delay:0.1s">
-        <div class="relative overflow-hidden h-72">
-            <img alt="DevConnect Platform" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-oZLdMocoVTVkHgUqjp6bA-4c-8-6hauImcuKp_-RxGtxLnoTcsqDGIyNgWjgLpn8C23MWGD95OXAHHI51dv2-VYl25kp0ri_cNhf04AvRzkSTO80Gk0CPeXSMX8SLLr0dscoLi83bggPkYHlXJ7qL5qEElbrH9qB5gnzTttMDDtOD2per0pdJ5cjyWpmiEfuAHi6aAZOBNSLd0JewASRWpaZoKteGw_38--PmTZF2yerQ7HgS6E7pesZ2xJOw0dZ5VbsuP6purm3"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-70"></div>
-            <div class="absolute bottom-5 left-5 flex gap-2">
-                <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">React</span>
-                <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">Socket.io</span>
-            </div>
-        </div>
-        <div class="p-7 space-y-3">
-            <h3 class="text-2xl font-bold text-white">DevConnect</h3>
-            <p class="text-on-surface-variant text-sm">Real-time collaboration platform for developers with integrated chat, live code editing, and project management features.</p>
-            <div class="flex gap-4 pt-2">
-                <a class="inline-flex items-center gap-2 text-cyan-400 font-bold hover:gap-3 transition-all text-sm" href="#">View Live <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-                <a class="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-white transition-all text-sm" href="#">GitHub <span class="material-symbols-outlined text-base">code</span></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Project 3 -->
-    <div class="project-card glass-card rounded-3xl overflow-hidden reveal" style="transition-delay:0.2s">
-        <div class="relative overflow-hidden h-72">
-            <div class="w-full h-full bg-gradient-to-br from-purple-900/40 via-[#110c15] to-cyan-900/30 flex items-center justify-center">
-                <span class="material-symbols-outlined text-8xl text-purple-400/30">cloud_upload</span>
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-70"></div>
-            <div class="absolute bottom-5 left-5 flex gap-2">
-                <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">Next.js</span>
-                <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">AWS S3</span>
-                <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">Prisma</span>
-            </div>
-        </div>
-        <div class="p-7 space-y-3">
-            <h3 class="text-2xl font-bold text-white">CloudVault</h3>
-            <p class="text-on-surface-variant text-sm">A cloud storage dashboard with drag-and-drop file uploads, shareable links, role-based access control, and real-time sync across devices.</p>
-            <div class="flex gap-4 pt-2">
-                <a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-3 transition-all text-sm" href="#">View Live <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-                <a class="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-white transition-all text-sm" href="#">GitHub <span class="material-symbols-outlined text-base">code</span></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Project 4 -->
-    <div class="project-card glass-card rounded-3xl overflow-hidden reveal" style="transition-delay:0.3s">
-        <div class="relative overflow-hidden h-72">
-            <div class="w-full h-full bg-gradient-to-br from-cyan-900/40 via-[#110c15] to-purple-900/30 flex items-center justify-center">
-                <span class="material-symbols-outlined text-8xl text-cyan-400/30">smart_toy</span>
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-70"></div>
-            <div class="absolute bottom-5 left-5 flex gap-2">
-                <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">MERN</span>
-                <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">OpenAI</span>
-                <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">JWT</span>
-            </div>
-        </div>
-        <div class="p-7 space-y-3">
-            <h3 class="text-2xl font-bold text-white">TaskFlow AI</h3>
-            <p class="text-on-surface-variant text-sm">AI-powered project management tool that auto-generates task breakdowns, estimates deadlines, and provides intelligent sprint planning suggestions.</p>
-            <div class="flex gap-4 pt-2">
-                <a class="inline-flex items-center gap-2 text-cyan-400 font-bold hover:gap-3 transition-all text-sm" href="#">View Live <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-                <a class="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-white transition-all text-sm" href="#">GitHub <span class="material-symbols-outlined text-base">code</span></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Project 5 -->
-    <div class="project-card glass-card rounded-3xl overflow-hidden reveal md:col-span-2" style="transition-delay:0.4s">
-        <div class="grid md:grid-cols-2">
-            <div class="relative overflow-hidden h-72">
-                <div class="w-full h-full bg-gradient-to-br from-purple-900/30 via-[#110c15] to-cyan-900/40 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-8xl text-cyan-400/30">monitoring</span>
-                </div>
-                <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#0A0A0A]/80 md:block hidden"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-70 md:hidden"></div>
-                <div class="absolute bottom-5 left-5 flex gap-2">
-                    <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">React</span>
-                    <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">Chart.js</span>
-                    <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">CoinGecko</span>
-                </div>
-            </div>
-            <div class="p-8 flex flex-col justify-center space-y-4">
-                <h3 class="text-3xl font-bold text-white">CryptoTracker</h3>
-                <p class="text-on-surface-variant">Live cryptocurrency dashboard with real-time price charts, portfolio tracking, price alerts, and historical data visualization powered by CoinGecko API.</p>
-                <div class="flex gap-4 pt-2">
-                    <a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-3 transition-all" href="#">View Live <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-                    <a class="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-white transition-all" href="#">GitHub <span class="material-symbols-outlined text-base">code</span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-</section>
-</div><!-- end scroll-container -->
-
-<!-- Footer -->
-<footer class="w-full border-t border-white/5 bg-[#0A0A0A]">
-<div class="flex flex-col md:flex-row justify-between items-center gap-8 px-12 py-16 max-w-7xl mx-auto">
-    <div class="space-y-4">
-        <span class="text-lg font-black text-white text-sm uppercase tracking-widest">Sameer Dwivedi</span>
-        <p class="text-slate-600 text-sm uppercase tracking-widest">&copy; 2024 Sameer Dwivedi. Engineered for the Decentralized Web.</p>
-    </div>
-    <div class="flex gap-8">
-        <a class="text-slate-600 hover:text-cyan-400 transition-colors text-sm uppercase tracking-widest" href="#">GitHub</a>
-        <a class="text-slate-600 hover:text-cyan-400 transition-colors text-sm uppercase tracking-widest" href="#">LinkedIn</a>
-        <a class="text-purple-500 font-bold text-sm uppercase tracking-widest" href="code.html#contact">Contact</a>
-    </div>
-</div>
-</footer>
-
-<script>
-    // Locomotive Scroll
-    const locoScroll = new LocomotiveScroll({
-        el: document.querySelector('#scroll-container'),
-        smooth: true, multiplier: 0.8, lerp: 0.07,
-        smartphone: { smooth: true }, tablet: { smooth: true }
-    });
-
-    // Custom Cursor
-    const cursor = document.getElementById('custom-cursor');
-    const torch = document.getElementById('torch-effect');
-    let mouse = { x: null, y: null };
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        torch.style.setProperty('--mouse-x', e.clientX + 'px');
-        torch.style.setProperty('--mouse-y', e.clientY + 'px');
-        mouse.x = e.clientX; mouse.y = e.clientY;
-    });
-    document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.8)');
-    document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
-
-    // Particle Background (same interactive system)
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [], trailParticles = [];
-    const PC = 120, CD = 150, MR = 200;
-
-    function initP() {
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        particles = [];
-        for (let i = 0; i < PC; i++) {
-            particles.push({
-                x: Math.random()*canvas.width, y: Math.random()*canvas.height,
-                vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4,
-                size: Math.random()*2.5+0.5
-            });
-        }
-    }
-    function drawP() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        if (mouse.x !== null) {
-            trailParticles.push({ x:mouse.x+(Math.random()-0.5)*20, y:mouse.y+(Math.random()-0.5)*20, life:1, size:Math.random()*3+1 });
-        }
-        trailParticles = trailParticles.filter(t=>t.life>0);
-        trailParticles.forEach(t=>{ t.life-=0.02; ctx.beginPath(); ctx.arc(t.x,t.y,t.size*t.life,0,Math.PI*2); ctx.fillStyle=`rgba(76,215,246,${t.life*0.3})`; ctx.fill(); });
-        if (trailParticles.length>60) trailParticles.splice(0,trailParticles.length-60);
-
-        particles.forEach((p,i)=>{
-            if (mouse.x!==null) {
-                const dx=p.x-mouse.x, dy=p.y-mouse.y, dist=Math.sqrt(dx*dx+dy*dy);
-                if (dist<MR) { const f=(MR-dist)/MR, a=Math.atan2(dy,dx); p.vx+=Math.cos(a)*f*1.5; p.vy+=Math.sin(a)*f*1.5; }
-            }
-            p.vx*=0.97; p.vy*=0.97; p.vx+=(Math.random()-0.5)*0.05; p.vy+=(Math.random()-0.5)*0.05;
-            p.x+=p.vx; p.y+=p.vy;
-            if(p.x<0){p.x=0;p.vx*=-0.5;} if(p.x>canvas.width){p.x=canvas.width;p.vx*=-0.5;}
-            if(p.y<0){p.y=0;p.vy*=-0.5;} if(p.y>canvas.height){p.y=canvas.height;p.vy*=-0.5;}
-
-            let col='rgba(221,183,255,0.4)';
-            if(mouse.x!==null){ const md=Math.hypot(p.x-mouse.x,p.y-mouse.y); if(md<MR*1.5){ const t=1-md/(MR*1.5); col=`rgba(${Math.round(221+(76-221)*t)},${Math.round(183+(215-183)*t)},${Math.round(255+(246-255)*t)},${0.4+t*0.4})`; }}
-            ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fillStyle=col; ctx.fill();
-
-            for(let j=i+1;j<particles.length;j++){
-                const p2=particles[j], d=Math.hypot(p.x-p2.x,p.y-p2.y);
-                if(d<CD){
-                    let al=(1-d/CD)*0.08;
-                    if(mouse.x!==null){ const mx=(p.x+p2.x)/2,my=(p.y+p2.y)/2,md2=Math.hypot(mx-mouse.x,my-mouse.y); if(md2<MR) al+=(1-md2/MR)*0.15; }
-                    ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(p2.x,p2.y); ctx.strokeStyle=`rgba(76,215,246,${al})`; ctx.lineWidth=0.6; ctx.stroke();
-                    for(let k=j+1;k<particles.length;k++){
-                        const p3=particles[k];
-                        if(Math.hypot(p2.x-p3.x,p2.y-p3.y)<CD*0.7 && Math.hypot(p.x-p3.x,p.y-p3.y)<CD*0.7){
-                            let ta=0.012;
-                            if(mouse.x!==null){ const ccx=(p.x+p2.x+p3.x)/3,ccy=(p.y+p2.y+p3.y)/3; const cmd=Math.hypot(ccx-mouse.x,ccy-mouse.y); if(cmd<MR) ta+=(1-cmd/MR)*0.05; }
-                            ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(p2.x,p2.y); ctx.lineTo(p3.x,p3.y); ctx.closePath(); ctx.fillStyle=`rgba(183,130,255,${ta})`; ctx.fill();
-                        }
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>All Projects | Sameer Dwivedi</title>
+    <meta name="description"
+        content="Browse all projects by Sameer Dwivedi — Full Stack MERN Developer building scalable web applications." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#ddb7ff",
+                        "secondary": "#4cd7f6",
+                        "primary-container": "#b76dff",
+                        "on-primary-container": "#400071",
+                        "background": "#0A0A0A",
+                        "surface": "#16111b",
+                        "on-surface": "#eadfed",
+                        "on-surface-variant": "#cfc2d6",
+                        "surface-container-lowest": "#110c15",
+                        "outline-variant": "#4d4354"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-xl": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"]
                     }
                 }
             }
-        });
-        requestAnimationFrame(drawP);
-    }
-    window.addEventListener('resize', initP);
-    initP(); drawP();
+        }
+    </script>
+    <style>
+        html,
+        body {
+            scroll-behavior: smooth;
+        }
 
-    // Reveal on scroll
-    locoScroll.on('scroll', () => {
-        document.querySelectorAll('.reveal').forEach(el => {
-            if (el.getBoundingClientRect().top < window.innerHeight * 0.85) el.classList.add('active');
+        body {
+            background-color: #0A0A0A;
+            color: #eadfed;
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        html.has-scroll-smooth {
+            overflow: hidden;
+        }
+
+        html.has-scroll-smooth body {
+            overflow: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #ddb7ff, #4cd7f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bg-gradient-vibrant {
+            background: linear-gradient(135deg, #ddb7ff 0%, #4cd7f6 100%);
+        }
+
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddb7ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        #torch-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 40;
+            background: radial-gradient(circle 300px at var(--mouse-x) var(--mouse-y), rgba(221, 183, 255, 0.05), transparent 80%);
+        }
+
+        canvas#particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 40px rgba(221, 183, 255, 0.08);
+            border-color: rgba(221, 183, 255, 0.3);
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-card img {
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+
+<body class="font-body-md selection:bg-primary-container selection:text-on-primary-container">
+    <canvas id="particle-canvas"></canvas>
+    <div id="custom-cursor"></div>
+    <div id="torch-effect"></div>
+
+    <div data-scroll-container id="scroll-container">
+        <!-- Nav -->
+        <nav class="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+            <div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+                <a href="index.html"
+                    class="text-xl font-bold bg-gradient-to-r from-purple-500 to-cyan-400 bg-clip-text text-transparent tracking-tight">Sameer
+                    Dwivedi</a>
+                <a href="index.html"
+                    class="flex items-center gap-2 text-slate-400 hover:text-white transition-all duration-300 font-semibold">
+                    <span class="material-symbols-outlined">arrow_back</span> Back to Home
+                </a>
+            </div>
+        </nav>
+
+        <!-- Header -->
+        <section class="pt-36 pb-16 px-8 max-w-7xl mx-auto">
+            <div class="reveal">
+                <span class="font-label-sm text-sm text-secondary tracking-[0.2em] uppercase">Portfolio</span>
+                <h1 class="font-display-xl text-5xl md:text-7xl text-gradient leading-tight mt-2">All Projects</h1>
+                <p class="text-on-surface-variant text-lg mt-4 max-w-2xl">A collection of projects I've built — ranging
+                    from full-stack platforms to real-time systems. Each one taught me something new.</p>
+            </div>
+        </section>
+
+        <!-- Projects Grid -->
+        <section class="px-8 pb-32 max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-10">
+
+                <!-- Project 1 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden reveal">
+                    <div class="relative overflow-hidden h-72">
+                        <img alt="Decentralized Shop" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtYxi_gZh7he9N_GO6Qi-cCG-vQBzgxeQ9GiOiUI3TL7yBMFXUViuFBAqc4BkbXlfwxlDv4VD_zggV18-o5vDoHXRwE0FrDtPUpfQQYP3jigOxJW9GCQVcK2XwFt_RfMRbUrxbbR5KwFJnuXG6K_CNjcvGxiPu80QLQeh_lOJQQTdjh4OAb61KQwx787993Ya0dN8Gze_Q6R7Yz8UxG6hD3XdXGpGqZdRid8sAG7T5ewp3WRtFoAhDGU26T_3pIvWUX9yatDktw9jC" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-70"></div>
+                        <div class="absolute bottom-5 left-5 flex gap-2">
+                            <span
+                                class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">MERN</span>
+                            <span
+                                class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">Redux</span>
+                        </div>
+                    </div>
+                    <div class="p-7 space-y-3">
+                        <h3 class="text-2xl font-bold text-white">Decentralized Shop</h3>
+                        <p class="text-on-surface-variant text-sm">A fully featured e-commerce platform with real-time
+                            inventory management, secure payment gateways, and admin dashboard with analytics.</p>
+                        <div class="flex gap-4 pt-2">
+                            <a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-3 transition-all text-sm"
+                                href="#">View Live <span
+                                    class="material-symbols-outlined text-base">arrow_forward</span></a>
+                            <a class="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-white transition-all text-sm"
+                                href="#">GitHub <span class="material-symbols-outlined text-base">code</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden reveal" style="transition-delay:0.1s">
+                    <div class="relative overflow-hidden h-72">
+                        <img alt="Sundown Studio Clone" class="w-full h-full object-cover"
+                            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-70"></div>
+                        <div class="absolute bottom-5 left-5 flex gap-2">
+                            <span
+                                class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">HTML/CSS</span>
+                            <span
+                                class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">JS</span>
+                            <span
+                                class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">GSAP</span>
+                        </div>
+                    </div>
+                    <div class="p-7 space-y-3">
+                        <h3 class="text-2xl font-bold text-white">Sundown Studio Clone</h3>
+                        <p class="text-on-surface-variant text-sm">A visually stunning frontend clone of the Sundown Studio website, featuring custom smooth scrolling, fluid layout transitions, and high-performance micro-animations for an interactive web experience.</p>
+                        <div class="flex gap-4 pt-2">
+                            <a class="inline-flex items-center gap-2 text-cyan-400 font-bold hover:gap-3 transition-all text-sm"
+                                href="https://sameer-dwivedi.github.io/Sundown-studio-clone/" target="_blank">View Live <span
+                                    class="material-symbols-outlined text-base">arrow_forward</span></a>
+                            <a class="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-white transition-all text-sm"
+                                href="https://github.com/sameer-dwivedi/Sundown-studio-clone" target="_blank">GitHub <span class="material-symbols-outlined text-base">code</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden reveal" style="transition-delay:0.2s">
+                    <div class="relative overflow-hidden h-72">
+                        <div
+                            class="w-full h-full bg-gradient-to-br from-purple-900/40 via-[#110c15] to-cyan-900/30 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-8xl text-purple-400/30">cloud_upload</span>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-70"></div>
+                        <div class="absolute bottom-5 left-5 flex gap-2">
+                            <span
+                                class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">Next.js</span>
+                            <span
+                                class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">AWS
+                                S3</span>
+                            <span
+                                class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">Prisma</span>
+                        </div>
+                    </div>
+                    <div class="p-7 space-y-3">
+                        <h3 class="text-2xl font-bold text-white">CloudVault</h3>
+                        <p class="text-on-surface-variant text-sm">A cloud storage dashboard with drag-and-drop file
+                            uploads, shareable links, role-based access control, and real-time sync across devices.</p>
+                        <div class="flex gap-4 pt-2">
+                            <a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-3 transition-all text-sm"
+                                href="#">View Live <span
+                                    class="material-symbols-outlined text-base">arrow_forward</span></a>
+                            <a class="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-white transition-all text-sm"
+                                href="#">GitHub <span class="material-symbols-outlined text-base">code</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden reveal" style="transition-delay:0.3s">
+                    <div class="relative overflow-hidden h-72">
+                        <div
+                            class="w-full h-full bg-gradient-to-br from-cyan-900/40 via-[#110c15] to-purple-900/30 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-8xl text-cyan-400/30">smart_toy</span>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-70"></div>
+                        <div class="absolute bottom-5 left-5 flex gap-2">
+                            <span
+                                class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">MERN</span>
+                            <span
+                                class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">OpenAI</span>
+                            <span
+                                class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">JWT</span>
+                        </div>
+                    </div>
+                    <div class="p-7 space-y-3">
+                        <h3 class="text-2xl font-bold text-white">TaskFlow AI</h3>
+                        <p class="text-on-surface-variant text-sm">AI-powered project management tool that
+                            auto-generates task breakdowns, estimates deadlines, and provides intelligent sprint
+                            planning suggestions.</p>
+                        <div class="flex gap-4 pt-2">
+                            <a class="inline-flex items-center gap-2 text-cyan-400 font-bold hover:gap-3 transition-all text-sm"
+                                href="#">View Live <span
+                                    class="material-symbols-outlined text-base">arrow_forward</span></a>
+                            <a class="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-white transition-all text-sm"
+                                href="#">GitHub <span class="material-symbols-outlined text-base">code</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden reveal md:col-span-2"
+                    style="transition-delay:0.4s">
+                    <div class="grid md:grid-cols-2">
+                        <div class="relative overflow-hidden h-72">
+                            <div
+                                class="w-full h-full bg-gradient-to-br from-purple-900/30 via-[#110c15] to-cyan-900/40 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-8xl text-cyan-400/30">monitoring</span>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-transparent to-[#0A0A0A]/80 md:block hidden">
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-70 md:hidden">
+                            </div>
+                            <div class="absolute bottom-5 left-5 flex gap-2">
+                                <span
+                                    class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">React</span>
+                                <span
+                                    class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs font-bold border border-purple-500/30">Chart.js</span>
+                                <span
+                                    class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/30">CoinGecko</span>
+                            </div>
+                        </div>
+                        <div class="p-8 flex flex-col justify-center space-y-4">
+                            <h3 class="text-3xl font-bold text-white">CryptoTracker</h3>
+                            <p class="text-on-surface-variant">Live cryptocurrency dashboard with real-time price
+                                charts, portfolio tracking, price alerts, and historical data visualization powered by
+                                CoinGecko API.</p>
+                            <div class="flex gap-4 pt-2">
+                                <a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-3 transition-all"
+                                    href="#">View Live <span
+                                        class="material-symbols-outlined text-base">arrow_forward</span></a>
+                                <a class="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-white transition-all"
+                                    href="#">GitHub <span class="material-symbols-outlined text-base">code</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div><!-- end scroll-container -->
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-white/5 bg-[#0A0A0A]">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-8 px-12 py-16 max-w-7xl mx-auto">
+            <div class="space-y-4">
+                <span class="text-lg font-black text-white text-sm uppercase tracking-widest">Sameer Dwivedi</span>
+                <p class="text-slate-600 text-sm uppercase tracking-widest">&copy; 2024 Sameer Dwivedi. Engineered for
+                    the Decentralized Web.</p>
+            </div>
+            <div class="flex gap-8">
+                <a class="text-slate-600 hover:text-cyan-400 transition-colors text-sm uppercase tracking-widest"
+                    href="#">GitHub</a>
+                <a class="text-slate-600 hover:text-cyan-400 transition-colors text-sm uppercase tracking-widest"
+                    href="#">LinkedIn</a>
+                <a class="text-purple-500 font-bold text-sm uppercase tracking-widest"
+                    href="code.html#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Locomotive Scroll
+        const locoScroll = new LocomotiveScroll({
+            el: document.querySelector('#scroll-container'),
+            smooth: true, multiplier: 0.8, lerp: 0.07,
+            smartphone: { smooth: false }, tablet: { smooth: false }
         });
-    });
-    setTimeout(() => {
-        document.querySelectorAll('.reveal').forEach(el => {
-            if (el.getBoundingClientRect().top < window.innerHeight * 0.85) el.classList.add('active');
+
+        // Custom Cursor
+        const cursor = document.getElementById('custom-cursor');
+        const torch = document.getElementById('torch-effect');
+        let mouse = { x: null, y: null };
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            torch.style.setProperty('--mouse-x', e.clientX + 'px');
+            torch.style.setProperty('--mouse-y', e.clientY + 'px');
+            mouse.x = e.clientX; mouse.y = e.clientY;
         });
-    }, 300);
-</script>
-</body></html>
+        document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.8)');
+        document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
+
+        // Touch support for mobile (keeps particle animation alive)
+        document.addEventListener('touchstart', (e) => {
+            const t = e.touches[0];
+            mouse.x = t.clientX;
+            mouse.y = t.clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            const t = e.touches[0];
+            mouse.x = t.clientX;
+            mouse.y = t.clientY;
+            torch.style.setProperty('--mouse-x', t.clientX + 'px');
+            torch.style.setProperty('--mouse-y', t.clientY + 'px');
+        }, { passive: true });
+
+        document.addEventListener('touchend', () => {
+            mouse.x = null;
+            mouse.y = null;
+        }, { passive: true });
+
+        document.addEventListener('touchcancel', () => {
+            mouse.x = null;
+            mouse.y = null;
+        }, { passive: true });
+
+        // Enhanced Mouse-Reactive Particle Background
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let trailParticles = [];
+        const PARTICLE_COUNT = 90;
+        const CONNECTION_DIST = 150;
+        const MOUSE_RADIUS = 180;
+
+        function initParticles() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                particles.push({
+                    x, y, homeX: x, homeY: y,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
+                    size: Math.random() * 2.5 + 0.5
+                });
+            }
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Mouse trail
+            if (mouse.x !== null) {
+                trailParticles.push({
+                    x: mouse.x + (Math.random() - 0.5) * 20,
+                    y: mouse.y + (Math.random() - 0.5) * 20,
+                    life: 1, size: Math.random() * 3 + 1
+                });
+            }
+            for (let t = trailParticles.length - 1; t >= 0; t--) {
+                const tp = trailParticles[t];
+                tp.life -= 0.025;
+                if (tp.life <= 0) { trailParticles.splice(t, 1); continue; }
+                ctx.beginPath();
+                ctx.arc(tp.x, tp.y, tp.size * tp.life, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(76, 215, 246, ${tp.life * 0.3})`;
+                ctx.fill();
+            }
+            if (trailParticles.length > 40) trailParticles.length = 40;
+
+            // Build neighbor lists for triangle optimization
+            particles.forEach((p, i) => {
+                // Mouse repulsion
+                if (mouse.x !== null) {
+                    const dx = p.x - mouse.x, dy = p.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < MOUSE_RADIUS && dist > 0) {
+                        const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
+                        p.vx += (dx / dist) * force * 1.2;
+                        p.vy += (dy / dist) * force * 1.2;
+                    }
+                }
+
+                // Gentle spring back to home position
+                p.vx += (p.homeX - p.x) * 0.001;
+                p.vy += (p.homeY - p.y) * 0.001;
+
+                // Damping + drift
+                p.vx *= 0.98;
+                p.vy *= 0.98;
+                p.vx += (Math.random() - 0.5) * 0.06;
+                p.vy += (Math.random() - 0.5) * 0.06;
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // Bounce at edges
+                if (p.x < 0) { p.x = 0; p.vx = Math.abs(p.vx) * 0.5; }
+                if (p.x > canvas.width) { p.x = canvas.width; p.vx = -Math.abs(p.vx) * 0.5; }
+                if (p.y < 0) { p.y = 0; p.vy = Math.abs(p.vy) * 0.5; }
+                if (p.y > canvas.height) { p.y = canvas.height; p.vy = -Math.abs(p.vy) * 0.5; }
+
+                // Color shift near mouse
+                let pColor = 'rgba(221, 183, 255, 0.4)';
+                if (mouse.x !== null) {
+                    const md = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+                    if (md < MOUSE_RADIUS * 1.5) {
+                        const t = 1 - md / (MOUSE_RADIUS * 1.5);
+                        pColor = `rgba(${Math.round(221 - 145 * t)},${Math.round(183 + 32 * t)},${Math.round(255 - 9 * t)},${0.4 + t * 0.4})`;
+                    }
+                }
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = pColor;
+                ctx.fill();
+
+                // Connections
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const d = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (d < CONNECTION_DIST) {
+                        let alpha = (1 - d / CONNECTION_DIST) * 0.1;
+                        if (mouse.x !== null) {
+                            const mDist = Math.hypot((p.x + p2.x) / 2 - mouse.x, (p.y + p2.y) / 2 - mouse.y);
+                            if (mDist < MOUSE_RADIUS) alpha += (1 - mDist / MOUSE_RADIUS) * 0.18;
+                        }
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(76, 215, 246, ${alpha})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+
+                        // Triangle fills
+                        const limit = Math.min(j + 8, particles.length);
+                        for (let k = j + 1; k < limit; k++) {
+                            const p3 = particles[k];
+                            const d2 = Math.hypot(p2.x - p3.x, p2.y - p3.y);
+                            const d3 = Math.hypot(p.x - p3.x, p.y - p3.y);
+                            if (d2 < CONNECTION_DIST * 0.65 && d3 < CONNECTION_DIST * 0.65) {
+                                let ta = 0.015;
+                                if (mouse.x !== null) {
+                                    const cmd = Math.hypot((p.x + p2.x + p3.x) / 3 - mouse.x, (p.y + p2.y + p3.y) / 3 - mouse.y);
+                                    if (cmd < MOUSE_RADIUS) ta += (1 - cmd / MOUSE_RADIUS) * 0.06;
+                                }
+                                ctx.beginPath();
+                                ctx.moveTo(p.x, p.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.lineTo(p3.x, p3.y);
+                                ctx.closePath();
+                                ctx.fillStyle = `rgba(183, 130, 255, ${ta})`;
+                                ctx.fill();
+                            }
+                        }
+                    }
+                }
+            });
+            animFrameId = requestAnimationFrame(drawParticles);
+        }
+
+        let animFrameId;
+        window.addEventListener('resize', initParticles);
+
+        // Restart animation loop if page becomes visible again (mobile tab switch / screen lock)
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                cancelAnimationFrame(animFrameId);
+                drawParticles();
+            }
+        });
+
+        initParticles();
+        drawParticles();
+
+        // Reveal on scroll
+        locoScroll.on('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight * 0.85) el.classList.add('active');
+            });
+        });
+        setTimeout(() => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight * 0.85) el.classList.add('active');
+            });
+        }, 300);
+    </script>
+</body>
+
+</html>
