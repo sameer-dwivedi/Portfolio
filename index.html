@@ -421,8 +421,8 @@
             smooth: true,
             multiplier: 0.8,
             lerp: 0.07,
-            smartphone: { smooth: true },
-            tablet: { smooth: true }
+            smartphone: { smooth: false },
+            tablet: { smooth: false }
         });
 
         // ── Custom Cursor & Torch ──
@@ -437,6 +437,32 @@
             mouse.x = e.clientX;
             mouse.y = e.clientY;
         });
+
+        // ── Touch support for mobile (keeps particle animation alive) ──
+        document.addEventListener('touchstart', (e) => {
+            const t = e.touches[0];
+            mouse.x = t.clientX;
+            mouse.y = t.clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            const t = e.touches[0];
+            mouse.x = t.clientX;
+            mouse.y = t.clientY;
+            torch.style.setProperty('--mouse-x', t.clientX + 'px');
+            torch.style.setProperty('--mouse-y', t.clientY + 'px');
+        }, { passive: true });
+
+        document.addEventListener('touchend', () => {
+            // Reset mouse so particles drift naturally after finger lifts
+            mouse.x = null;
+            mouse.y = null;
+        }, { passive: true });
+
+        document.addEventListener('touchcancel', () => {
+            mouse.x = null;
+            mouse.y = null;
+        }, { passive: true });
 
         document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.8)');
         document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
@@ -575,10 +601,20 @@
                     }
                 }
             });
-            requestAnimationFrame(drawParticles);
+            animFrameId = requestAnimationFrame(drawParticles);
         }
 
+        let animFrameId;
         window.addEventListener('resize', initParticles);
+
+        // Restart animation loop if page becomes visible again (mobile tab switch / screen lock)
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                cancelAnimationFrame(animFrameId);
+                drawParticles();
+            }
+        });
+
         initParticles();
         drawParticles();
 
